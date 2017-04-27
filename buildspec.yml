@@ -1,6 +1,10 @@
 version: 0.1
 
 phases:
+  install: 
+    commands:
+      - go get golang.org/x/text/language
+
   build:
     commands:
       - echo Build started on `date`
