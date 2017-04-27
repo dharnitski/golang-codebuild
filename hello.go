@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"golang.org/x/text/language"
+)
 
 func main() {
 	fmt.Println("hello world")
@@ -9,4 +13,5 @@ func main() {
 	fmt.Println(true && false)
 	fmt.Println(true || false)
 	fmt.Println(!true)
+	fmt.Println(language.Russian)
 }
