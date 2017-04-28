@@ -1,11 +1,10 @@
 version: 0.1
 
-phases:
-
 environment_variables:
   plaintext:
     PACKAGE: "github.com/dharnitski/golang-codebuild"
 
+phases:
   install: 
     commands:
       - echo CODEBUILD_SRC_DIR - $CODEBUILD_SRC_DIR
