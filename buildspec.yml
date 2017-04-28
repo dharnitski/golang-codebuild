@@ -3,8 +3,9 @@ version: 0.1
 phases:
   install: 
     commands:
+      - echo CODEBUILD_SRC_DIR - $CODEBUILD_SRC_DIR
+      - echo GOPATH - $GOPATH
       - go get golang.org/x/text/language
-
   build:
     commands:
       - echo Build started on `date`
