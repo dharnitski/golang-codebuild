@@ -17,6 +17,12 @@ jobs:
 
       - run: go get ./...
 
+      - run: go get     github.com/go-playground/overalls
+      - run: go install github.com/go-playground/overalls
+
+      - run: go get     github.com/mattn/goveralls
+      - run: go install github.com/mattn/goveralls
+
       # Normally, this step would be in a custom primary image;
       # we've added it here for the sake of explanation.
       - run: go get github.com/jstemmer/go-junit-report
@@ -26,6 +32,12 @@ jobs:
           command: |
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             go test $(go list ./... | grep -v /vendor) -v | tee ${TEST_RESULTS}/go-test.out
+
+      - run:
+          name: Generate Code Coverage
+          command: |
+            $GOPATH/bin/overalls -project=github.com/cbdr/tsr-api -covermode=count -debug
+            $GOPATH/bin/goveralls -coverprofile=overalls.coverprofile -service semaphore    
 
       - store_test_results:
           path: /tmp/test-results
