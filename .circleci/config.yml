@@ -37,7 +37,7 @@ jobs:
           name: Generate Code Coverage
           command: |
             $GOPATH/bin/overalls -project=github.com/dharnitski/golang-codebuild -covermode=count -debug
-            $GOPATH/bin/goveralls -coverprofile=overalls.coverprofile -service semaphore    
+            $GOPATH/bin/goveralls -coverprofile=overalls.coverprofile -service=circle-ci -repotoken=$COVERALLS_TOKEN    
 
       - store_test_results:
           path: /tmp/test-results
