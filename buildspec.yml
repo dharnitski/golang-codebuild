@@ -1,34 +1,21 @@
-version: 0.1
-
-environment_variables:
-  plaintext:
-    PACKAGE: "github.com/dharnitski/golang-codebuild"
+version: 0.2
 
 phases:
   install: 
     commands:
       - echo CODEBUILD_SRC_DIR - $CODEBUILD_SRC_DIR
       - echo GOPATH - $GOPATH
-
-      - echo Create dir in GOPATH for sources
-      - mkdir -p ${GOPATH}/src/${PACKAGE}
-
-      - echo Copy source files into GOPATH
-      - echo cp -a ${CODEBUILD_SRC_DIR}/.  ${GOPATH}/src/${PACKAGE}
-      - cp -a ${CODEBUILD_SRC_DIR}/.  ${GOPATH}/src/${PACKAGE}
-
-      - cd ${GOPATH}/src/${PACKAGE} && go get ./...
-
+      - echo GOROOT - $GOROOT
   build:
     commands:
       - echo Build started on `date`
+      - echo Getting packages
+      - go get ./...
       - echo Compiling the Go code...
-      - cd ${GOPATH}/src/${PACKAGE} && go build -o ${CODEBUILD_SRC_DIR}/application
-
+      - go build hello.go 
   post_build:
     commands:
       - echo Build completed on `date`
-
 artifacts:
   files:
-    - application
+    - hello
